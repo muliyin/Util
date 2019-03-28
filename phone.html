@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>短信验证码倒计时</title>
+    <style>
+        button {
+            color: red;
+        }
+
+        .disable {
+            pointer-events: none;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <div>
+        <span>用户名：</span>
+        <input type="text">
+    </div>
+    <div>
+        <span>密码：</span>
+        <input type="text">
+    </div>
+    <div>
+        <span>验证码：</span>
+        <input type="text">
+    </div>
+    <div>
+        <input type="text" placeholder="请输入验证码">
+        <button id="btn">发送验证码</button>
+    </div>
+
+</div>
+<script type="text/javascript">
+	const oBtn = document.getElementById('btn');
+	let flag = true;
+
+	oBtn.addEventListener("click", function () {
+		let time = 10;
+		oBtn.classList.add('disable');
+		oBtn.innerText = '已发送';
+
+		if (flag) {
+			flag = false;
+			var timer = setInterval(() => {
+				time--;
+				oBtn.innerText = time + ' 秒';
+				if (time === 0) {
+					clearInterval(timer);
+					oBtn.innerText = '重新获取';
+					oBtn.classList.remove('disable');
+					flag = true;
+				}
+			}, 1000)
+		}
+	});
+
+</script>
+</body>
+</html>
